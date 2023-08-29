@@ -34,9 +34,7 @@ public class ConfigurationSecurity {
                 .and()
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
-
                 .requestMatchers(HttpMethod.POST,"/api/v1/auth/register").permitAll()
-                .requestMatchers("/api/v1/auth/admin").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/v1/auth/update").permitAll()
                 .requestMatchers(HttpMethod.DELETE,"/api/v1/auth/delete").permitAll()
                 .anyRequest().authenticated()
