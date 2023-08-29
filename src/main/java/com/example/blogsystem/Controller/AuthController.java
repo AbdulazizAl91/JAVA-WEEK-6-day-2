@@ -1,5 +1,6 @@
 package com.example.blogsystem.Controller;
 
+import com.example.blogsystem.Api.ApiResponse;
 import com.example.blogsystem.Model.User;
 import com.example.blogsystem.Service.AuthService;
 import jakarta.validation.Valid;
@@ -16,18 +17,18 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid User user){
         authService.register(user);
-        return ResponseEntity.status(200).body("user registered");
+        return ResponseEntity.status(200).body(new ApiResponse("user registered"));
     }
 
     @PutMapping("/update")
     public ResponseEntity updateUser(@AuthenticationPrincipal User user, @RequestBody @Valid User user_info){
         authService.updateUser(user.getId(),user_info);
-        return ResponseEntity.status(200).body("user updated");
+        return ResponseEntity.status(200).body(new ApiResponse("user updated"));
     }
     @DeleteMapping("/delete")
     public ResponseEntity deleteUser(@AuthenticationPrincipal User user){
         authService.deleteUser(user.getId());
-        return ResponseEntity.status(200).body("user deleted");
+        return ResponseEntity.status(200).body(new ApiResponse("user deleted"));
 
     }
 

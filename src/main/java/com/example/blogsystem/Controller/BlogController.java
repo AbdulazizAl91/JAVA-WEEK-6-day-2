@@ -1,5 +1,6 @@
 package com.example.blogsystem.Controller;
 
+import com.example.blogsystem.Api.ApiResponse;
 import com.example.blogsystem.Model.Blog;
 import com.example.blogsystem.Model.User;
 import com.example.blogsystem.Service.BlogService;
@@ -22,18 +23,18 @@ public class BlogController {
     @PostMapping("/add")
     public ResponseEntity addBlog(@AuthenticationPrincipal User user,@RequestBody @Valid Blog blog){
         blogService.addBlog(user.getId(),blog);
-        return ResponseEntity.status(200).body("blog added");
+        return ResponseEntity.status(200).body(new ApiResponse("blog added"));
     }
     @PutMapping("/update/{id}")
     public ResponseEntity updateBlog(@AuthenticationPrincipal User user,@PathVariable Integer id,@RequestBody @Valid Blog blog){
         blogService.updateBlog(user.getId(),id,blog);
-        return ResponseEntity.status(200).body("blog updated");
+        return ResponseEntity.status(200).body(new ApiResponse("blog updated"));
 
     }
     @DeleteMapping("delete/{id}")
     public ResponseEntity deleteBlog(@AuthenticationPrincipal User user,@PathVariable Integer id){
         blogService.deleteBlog(user.getId(),id);
-        return ResponseEntity.status(200).body("blog deleted");
+        return ResponseEntity.status(200).body(new ApiResponse("blog deleted"));
     }
     @GetMapping("/get-all-blog")
     public ResponseEntity getAllBlogs(){
